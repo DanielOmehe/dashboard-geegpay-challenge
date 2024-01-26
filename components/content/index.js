@@ -9,6 +9,10 @@ const DashboardContent = ({children}) => {
                     position: absolute;
                     top: 80px;
                     left: 80px;
+                    padding: 1rem;
+                    overflow-y: scroll;
+                    scrollbar-color: #9CA4AB;
+                    scrollbar-width: thin;
 				}
 			`}</style>
 		</>

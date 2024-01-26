@@ -1,4 +1,5 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
+import Image from 'next/image'
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
@@ -102,7 +103,11 @@ const DashboardSalesTrend = () => {
 					<h3>Sales Trend</h3>
 					<div className="sort-by">
 						<p>Sort by</p>
-						<></>
+                        <select>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                            <option>Yearly</option>
+                        </select>
 					</div>
 				</div>
 				<BarChart
@@ -131,6 +136,41 @@ const DashboardSalesTrend = () => {
 					</Bar>
 				</BarChart>
 			</section>
+            <style jsx>{`
+                .sales-trend{
+                    background: #fff;
+                    width: 50.375rem;
+                    height: 23.375rem;
+                    padding: 1rem 1.2rem;
+                    border-radius: .8rem;
+                }
+
+                .sales-trend-header{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .sort-by{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1rem;
+                }
+
+                .sort-by button{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .5rem;
+                    padding: .3rem .6rem;
+                    border-radius: 50px;
+                    background: #fff;
+                    border: 1px solid #cdcdcd;
+                    cursor: pointer;
+                }
+            `}</style>
 		</>
 	);
 };
