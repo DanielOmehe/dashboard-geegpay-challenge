@@ -202,7 +202,7 @@ const DashboardSideBar = () => {
 						width: 80px;
 						height: 90%;
 						position: fixed;
-						top: 80px;
+						top: 67px;
 						left: ${showSideBar ? "0" : "-80px"};
 						z-index: 20;
 						background: var(--bg-secondary);
