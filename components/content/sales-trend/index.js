@@ -1,100 +1,93 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
-
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
+import {
+	BarChart,
+	Bar,
+	Rectangle,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+} from "recharts";
+import { useDashboardContext } from '../../context'
 
 const data = [
 	{
-		name: "January",
-		uv: 4000,
+		name: "Jan",
+		uv: 6000,
 		pv: 2400,
 		amt: 2400,
 	},
 	{
-		name: "February",
-		uv: 3000,
+		name: "Feb",
+		uv: 21000,
 		pv: 1398,
 		amt: 2210,
 	},
 	{
-		name: "March",
-		uv: 2000,
+		name: "Mar",
+		uv: 3500,
 		pv: 9800,
 		amt: 2290,
 	},
 	{
-		name: "April",
-		uv: 2780,
+		name: "Apr",
+		uv: 28000,
 		pv: 3908,
 		amt: 2600,
 	},
 	{
 		name: "May",
-		uv: 1890,
+		uv: 9000,
 		pv: 4800,
 		amt: 2181,
 	},
 	{
 		name: "June",
-		uv: 2390,
+		uv: 45000,
 		pv: 3800,
 		amt: 2500,
 	},
 	{
 		name: "July",
-		uv: 3490,
+		uv: 9000,
 		pv: 4300,
 		amt: 2100,
 	},
 	{
-		name: "August",
-		uv: 3490,
+		name: "Aug",
+		uv: 27000,
 		pv: 4300,
 		amt: 2100,
 	},
 	{
-		name: "September",
-		uv: 3490,
+		name: "Sept",
+		uv: 34000,
 		pv: 4300,
 		amt: 2100,
 	},
 	{
-		name: "October",
-		uv: 3490,
+		name: "Oct",
+		uv: 4800,
 		pv: 4300,
 		amt: 2100,
 	},
 	{
-		name: "November",
-		uv: 3490,
+		name: "Nov",
+		uv: 25000,
 		pv: 4300,
 		amt: 2100,
 	},
 	{
-		name: "December",
-		uv: 3490,
+		name: "Dec",
+		uv: 22000,
 		pv: 4300,
 		amt: 2100,
 	},
 ];
 
-const getPath = (x, y, width, height) => {
-	return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
-		y + height / 3
-	}
-  ${x + width / 2}, ${y}
-  C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-		x + width
-	}, ${y + height}
-  Z`;
-};
-
-const TriangleBar = (props) => {
-	const { fill, x, y, width, height } = props;
-
-	return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-};
-
 const DashboardSalesTrend = () => {
+    const { handleSelect, option } = useDashboardContext()
 	return (
 		<>
 			<section className="sales-trend">
@@ -102,35 +95,105 @@ const DashboardSalesTrend = () => {
 					<h3>Sales Trend</h3>
 					<div className="sort-by">
 						<p>Sort by</p>
-						<></>
+						<select value={option} onChange={(e) => handleSelect(e)}>
+							<option value={'Weekly'}>Weekly</option>
+							<option selectedvalue={'Monthly'}>Monthly</option>
+							<option value={'Yearly'}>Yearly</option>
+						</select>
 					</div>
 				</div>
-				<BarChart
-					width={500}
-					height={300}
-					data={data}
-					margin={{
-						top: 20,
-						right: 30,
-						left: 20,
-						bottom: 5,
+				<ResponsiveContainer
+					width="100%"
+					height="100%"
+					style={{
+                        padding: '1rem 0',
 					}}
 				>
-					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis dataKey="name" />
-					<YAxis />
-					<Bar
-						dataKey="uv"
-						fill="#8884d8"
-						shape={<TriangleBar />}
-						label={{ position: "top" }}
+					<BarChart
+						width={500}
+						height={300}
+						data={data}
+						margin={{
+							top: 5,
+							right: 30,
+							left: 20,
+							bottom: 5,
+						}}
 					>
-						{data.map((entry, index) => (
-							<Cell key={`cell-${index}`} fill={colors[index % 20]} />
-						))}
-					</Bar>
-				</BarChart>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis dataKey="name" />
+						<YAxis />
+						<Tooltip />
+						<Legend />
+						<Bar
+							dataKey="pv"
+							fill="#ED544Ede"
+							activeBar={<Rectangle fill="pink" stroke="blue" />}
+						/>
+						<Bar
+							dataKey="uv"
+							fill="#34CAA5ab"
+							activeBar={<Rectangle fill="gold" stroke="purple" />}
+						/>
+					</BarChart>
+				</ResponsiveContainer>
 			</section>
+			<style jsx>{`
+				.sales-trend {
+					background: var(--bg-secondary);
+					width: 50.375rem;
+					height: 23.375rem;
+					padding: 1rem 1.2rem;
+					border-radius: 0.8rem;
+                    color: var(--text-primary);
+                    box-shadow: 0 0 1px var(--secondary);
+				}
+
+				.sales-trend-header {
+					width: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+				}
+
+				.sort-by {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 1rem;
+				}
+
+				.sort-by select {
+					padding: 0.3rem 0.6rem;
+					border-radius: 50px;
+					background: var(--bg-secondary);
+					border: 1px solid #cdcdcd;
+                    color: var(--text-primary);
+				}
+
+                @media only screen and (max-width: 1200px){
+                    .sales-trend{
+                        width: 100%;
+                    }
+                }
+
+                @media only screen and (max-width: 1500px){
+                    .sales-trend{
+                        width: 53%;
+                    }
+                }
+
+                @media only screen and (max-width: 912px){
+                    .sales-trend{
+                        width: 100%;
+                    }
+                }
+                @media only screen and (max-width: 912px){
+                    .sales-trend{
+                        width: 100%;
+                    }
+                }
+			`}</style>
 		</>
 	);
 };
