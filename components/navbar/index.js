@@ -45,6 +45,16 @@ const DashboardNavBar = () => {
 					>
 						<Notification />
 						<div className="notification-container">
+							<div className="notification-header">
+								<h3>Notification</h3>
+								<Image
+									width={20}
+									height={20}
+									src={"/icons/search.svg"}
+									alt="search button"
+								/>
+							</div>
+							<button className="mark-as-read">Mark all as read</button>
 							<div className="notification-list">
 								<p>Nothing to see here</p>
 							</div>
@@ -97,6 +107,27 @@ const DashboardNavBar = () => {
 					padding: 1.12rem;
 					box-shadow: 0 0 2px rgba(0, 0, 0, 0.23);
 				}
+
+                .notification-header{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--secondary);
+                    padding: .5rem 0; 
+                }
+
+                .mark-as-read{
+                    width: 100%;
+                    padding: .5rem 0;
+                    text-align: center;
+                    border: none;
+                    cursor: pointer;
+                    color: var(--bg-secondary);
+                    outline: none;
+                    margin: .5rem 0;
+                    background: var(--text-primary);
+                    font-size: .8rem;
+                }
 
                 .dashboard-logo{
                     display: flex;
@@ -239,7 +270,7 @@ const DashboardNavBar = () => {
 
 				.notification-container {
 					width: 20rem;
-					height: 50px;
+					height: fit-content;
 					padding: 0.5rem;
 					background: var(--bg-secondary);
 					position: absolute;
@@ -253,13 +284,13 @@ const DashboardNavBar = () => {
 
 				.notification-list {
 					width: 100%;
-					height: 100%;
-                    box-shadow: inset 0 0 .1rem rgba(0,0,0,.34);
-					border-radius: 0.3rem;
+					height: 40px;
+					border-radius: 0.2rem;
 					display: flex;
 					align-items: center;
                     justify-content: center;
 					font-size: 1.2rem;
+                    margin-top: .5rem;
 				}
 
                 @media only screen and (max-width: 1500px) and (min-width: 1200px){
@@ -408,7 +439,7 @@ const DashboardNavBar = () => {
                     }
 
                     .dashboard-logo{
-                        gap: .8rem;
+                        gap: .5rem;
                     }
 
                     .line{
@@ -428,7 +459,6 @@ const DashboardNavBar = () => {
                     .dashboard-content{
                         display: flex;
                         gap: 0;
-                        margin-right: .6rem;
                     }
 
                     .dashboard-search{
@@ -437,11 +467,11 @@ const DashboardNavBar = () => {
                         align-items: center;
                         justify-content: center;
                         padding: 0 .4rem;
-                        margin-left: 1rem;
+                        margin-left: .2rem;
                     }
 
                     .dashboard-date{
-                        margin: 0 1rem;
+                        margin: 0 .5rem;
                         width: fit-content;
                     }
 
@@ -468,12 +498,16 @@ const DashboardNavBar = () => {
                 }    
 
                 @media only screen and (max-width: 600px){
-                    .dashboard-date p{
+                    .dashboard-date{
                         display: none;
                     }
 
                     .dashboard-search input{
                         display: none;
+                    }
+
+                    .dashboard-content{
+                        margin-left: 1.8rem;
                     }
 
                     .dashboard-search{
@@ -482,10 +516,17 @@ const DashboardNavBar = () => {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        padding: 0 .4rem;
                         margin: 0;
                         border: none;
                         background: none;
+                    }
+
+                    .dashboard-user-account{
+                        overflow: hidden;
+                    }
+                    .dashboard-notification{
+                        padding: 0;
+                        margin-left: -.3rem;
                     }
                 }
 			`}</style>

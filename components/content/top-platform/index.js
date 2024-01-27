@@ -73,9 +73,8 @@ const TopPlatforms = () => {
 
                 @media only screen and (max-width: 912px){
                     .top-platforms {
-                        margin: 0;
+                        margin: 1rem 0 3rem;
                         width: 100%;
-                        margin-bottom: 3rem;
                     }
                 }
 			`}</style>

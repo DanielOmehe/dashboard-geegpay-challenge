@@ -18,36 +18,65 @@ const OrderTable = ({ image, name, date, amount, status }) => {
 			</tr>
 			<style jsx>{`
 				.order-table-row {
-                    padding: .5rem 0;
+					padding: 0.5rem 0;
 				}
 
 				.order-table-row td {
-                    padding: .38rem 0;
-                    margin-top: .1rem;
+					padding: 0.38rem 0;
+					margin-top: 0.1rem;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 
-                .order-status{
-                    color: ${status === 'Paid' ? 'var(--success)' : 'var(--error)'};
-                }
+				td:first-child {
+					min-width: 230px;
+					max-width: 230px;
+				}
 
-                .order-name{
-                    display: flex;
-                    align-items: center;
-                    justfy-content: flex-start;
-                    gap: 1rem;
-                }
+				td:nth-child(2) {
+					min-width: 130px;
+					max-width: 130px;
+				}
 
-                .order-invoice{
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    gap: .2rem;
-                    transform: translateY(-.85rem);
-                }
+				td:nth-child(3) {
+					min-width: 130px;
+					max-width: 130px;
+				}
 
-                @media only screen and (max-width: 912px){
+				td:nth-child(4) {
+					min-width: 130px;
+					max-width: 130px;
+				}
+       
+				td:last-child {
+					min-width: 100px;
+					max-width: 100px;
+				}
 
-                }
+				.order-status {
+					color: ${status === "Paid" ? "var(--success)" : "var(--error)"};
+				}
+
+				.order-name {
+					display: flex;
+					align-items: center;
+					justfy-content: flex-start;
+					gap: 1rem;
+				}
+
+				.order-invoice {
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					gap: 0.2rem;
+					transform: translateY(-0.85rem);
+				}
+
+				@media only screen and (max-width: 912px) {
+					.order-table-row {
+					}
+				}
 			`}</style>
 		</>
 	);
