@@ -1,4 +1,8 @@
-const OrderList = ({ children }) => {
+import { useDashboardContext } from "../../context";
+import OrderTable from "./order-table";
+
+const OrderList = () => {
+	const { orders } = useDashboardContext();
 	return (
 		<>
 			<section className="order-list-summary">
@@ -6,32 +10,47 @@ const OrderList = ({ children }) => {
 					<h3>Last Order</h3>
 					<p>See All</p>
 				</div>
-				<div className="order-list-table">
-					<ul className='order-list-table-head'>
-						<li>Name</li>
-						<li>Date</li>
-						<li>Amount</li>
-						<li>Status</li>
-						<li>Invoice</li>
-					</ul>
-					<div className="order-list-table-body">{children}</div>
-				</div>
+				<table className="order-list-table">
+					<thead className="order-list-table-head">
+						<tr>
+							{" "}
+							<th>Name</th>
+							<th>Date</th>
+							<th>Amount</th>
+							<th>Status</th>
+							<th>Invoice</th>
+						</tr>
+					</thead>
+					<tbody className="order-list-table-body">
+						{orders.map(({ image, name, date, amount, status }, indx) => (
+							<OrderTable
+								image={image}
+								name={name}
+								date={date}
+								amount={amount}
+								status={status}
+							/>
+						))}
+					</tbody>
+				</table>
 			</section>
 			<style jsx>{`
 				.order-list-summary {
-					background: #fff;
+					background: var(--bg-secondary);
 					width: 50.375rem;
 					height: 23.375rem;
-					padding: 1rem 1.2rem;
+					padding: 0.8rem 1.2rem;
 					border-radius: 0.8rem;
 					margin-top: 1rem;
+                    color: var(--text-primary);
+                    box-shadow: 0 0 1px var(--secondary);
 				}
 
 				.order-list-header {
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
-					margin: 0.8rem;
+					margin-bottom: 0.2rem;
 				}
 
 				.order-list-header h3 {
@@ -40,25 +59,45 @@ const OrderList = ({ children }) => {
 
 				.order-list-header p {
 					font-size: 1rem;
-					color: var(--color-green);
+					color: var(--success);
 				}
 
 				.order-list-table {
 					width: 100%;
+                    margin-top: 0;
+                    border-collapse: collapse;
 				}
 
-				.order-list-table-head {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    list-style: none;
-                    color: var(--color-grey);
-                    font-size: 1rem;
+				.order-list-table-head tr th {
+					border-bottom: 1px solid var(--secondary);
+                    text-align: left;
+                    color: var(--secondary);
+                    padding: .8rem 0;
+                    margin-bottom: 1.3rem;
 				}
 
-                .order-list-table-body{
-                    width: 100%;
-                    border: 2px solid red;
+				.order-list-table-body {
+					width: 100%;
+					padding: 0 0.5rem;
+					margin-top: 1rem;
+				}
+
+                @media only screen and (max-width: 1500px){
+                    .order-list-summary{
+                        width: 53%;
+                    }   
+                }
+
+                @media only screen and (max-width: 1200px){
+                    .order-list-summary{
+                        width: 100%;
+                    }   
+                }
+
+                @media only screen and (max-width: 912px){
+                    .order-list-summary{
+                        width: 100%;
+                    }   
                 }
 			`}</style>
 		</>

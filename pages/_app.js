@@ -1,21 +1,24 @@
 import "../public/styles/index.css";
 import DashboardProvider from "../components/context";
-import { Metadata } from 'next';
+import Head from 'next/head'
 
-export const metadata: Metadata = {
-  title: 'Coding Beauty',
-  description:
-    'codingbeautydev.com: Coding - the art, the science, and the passion.',
+export const metadata = {
+	title: "Coding Beauty",
+	description:
+		"codingbeautydev.com: Coding - the art, the science, and the passion.",
 };
 
 const App = ({ Component, pageProps }) => (
 	<DashboardProvider>
-		<link
-			rel="icon"
-			href="/icon?<generated>"
-			type="image/<generated>"
-			sizes="<generated>"
-		/>
+		<Head>
+			<title>Analytic Dashboard </title>
+			<meta name="description" content="A Geegpay coding Challenge" />
+			<link
+				rel="icon"
+				href="/icons/logo.svg"
+				type="image/svg"
+			/>
+		</Head>
 		<Component {...pageProps} />
 	</DashboardProvider>
 );

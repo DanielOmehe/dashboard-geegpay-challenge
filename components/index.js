@@ -1,11 +1,14 @@
+import { useDashboardContext } from './context';
+
 const DashboardHeader =({children})=>{
+    const { currentTheme } = useDashboardContext();
     return(
         <>
-        <header className="dashboard-header">{children}</header>
+        <header className={`dashboard-header ${currentTheme}`}>{children}</header>
         <style jsx>{`
             .dashboard-header{
                 width: 100%;
-                height: 100vh;
+                color: var(--text-primary);
             }
         `}</style>
         </>

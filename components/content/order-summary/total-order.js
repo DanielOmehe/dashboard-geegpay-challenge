@@ -27,8 +27,10 @@ const CashFlow = ({ icon, name, value, trend, graph, color, text_color }) => {
 				.total-order {
 					width: 100%;
 					padding: 1rem;
-					background: #fff;
+					background: var(--bg-secondary);
+                    box-shadow: 0 0 1px var(--secondary);
 					border-radius: 0.8rem;
+                    color: var(--text-primary);
 				}
 
 				.total-order-header {
